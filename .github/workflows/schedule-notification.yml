@@ -2,7 +2,7 @@ name: Schedule Notification
 
 on:
   schedule:
-    - cron: '11 7 16 12 *'
+    - cron: '57 12 18 12 *'
   workflow_dispatch:  # 手動で実行するためのトリガー
 
 jobs:
