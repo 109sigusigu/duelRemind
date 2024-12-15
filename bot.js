@@ -93,7 +93,7 @@ function scheduleEvents(events) {
 // Discordに通知を送信する関数
 function sendToDiscord(event) {
   const message = {
-    content: `@everyone\n${event.description}が近いのだよ`,
+    content: `@everyone\n${event.subject}が近いのだよ。\n${event.endDate} ${event.endTime}まで。`,
   };
 
   axios.post(webhookUrl, message)
