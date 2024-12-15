@@ -1,0 +1,46 @@
+name: Schedule Notification
+
+on:
+  schedule:
+    - cron: '27 12 * * *'
+  workflow_dispatch:  # 手動で実行するためのトリガー
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write   # リポジトリ内のコンテンツに対して書き込み権限
+      actions: write    # ワークフローファイルを作成・更新するための権限
+
+    steps:
+      # リポジトリのコードをチェックアウト
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # jqをインストール (もしまだインストールされていない場合)
+      - name: Install jq
+        run: sudo apt-get install jq
+
+      # Node.js をセットアップ
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      # 依存関係をインストール
+      - name: Install dependencies
+        run: npm install
+
+      # Gitユーザー情報を設定
+      - name: Set Git user
+        run: |
+          git config --global user.email "109sigure@gmail.com"
+          git config --global user.name "109sigusigu"
+
+      # スクリプトを実行
+      - name: Run the bot script
+        run: node bot.js
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }
