@@ -10,10 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # リポジトリのコードをチェックアウト
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
       # Node.js をセットアップ
       - name: Set up Node.js
         uses: actions/setup-node@v2
