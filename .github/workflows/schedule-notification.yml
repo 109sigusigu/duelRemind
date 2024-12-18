@@ -2,6 +2,8 @@ name: Schedule Notification
 
 on:
   workflow_dispatch:  # 手動で実行するためのトリガー
+  repository_dispatch:
+    types: [remind]
 
 jobs:
   run:
